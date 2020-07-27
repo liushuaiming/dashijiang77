@@ -14,6 +14,10 @@
     <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
     <!-- 引入模板引擎js文件 -->
     <script src="./libs/template-web.js"></script>
+    <!-- 引入http.js接口文件 -->
+    <script src="./js/http.js"></script>
+    <!-- 引入article_category.js文件 -->
+    <script src="./js/article_category.js"></script>
 </head>
 
 <body>
@@ -43,13 +47,86 @@
                 <tfoot>
                     <tr>
                         <td colspan="3" class="text-center">
-                            <a href="javascript:void(0)" class="btn btn-success" id="xinzengfenlei" data-toggle="modal"
-                                data-target="#myModal">新增分类</a>
+                            <button class="btn btn-success" id="xinzengfenlei" data-toggle="modal" data-target="#myModal">新增分类</button>
                         </td>
                     </tr>
                 </tfoot>
             </table>
         </div>
     </div>
+
+    <!-- 这是增加文章分类或更新文章分类时弹出来的模态框 -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">新增文章分类</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="myForm">
+                        <!-- <input type="hidden" name="id"> -->
+                        <div class="form-group hidden">
+                            <label>文章分类id</label>
+                            <input type="text" class="form-control" name="id" placeholder="id">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">文章分类</label>
+                            <input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">文章别名</label>
+                            <input type="text" class="form-control" name="slug" id="exampleInputPassword1" placeholder="slug">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-sure">确定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- 这是删除文章分类时弹出来的模态框 -->
+    <div class="modal fade" id="delModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">删除文章分类</h4>
+                </div>
+                <div class="modal-body">
+                    <p>您真的要忍心删除掉当前的这条分类数据吗???</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary btn-sure-del">确定</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <!-- 这是文章分类数据的模板 -->
+    <script type="text/template" id="categoryList">
+        {{each data value index}}
+        <tr>
+            <td>{{value.name}}</td>
+            <td>{{value.slug}}</td>
+            <td class="text-center">
+                <button data-id="{{value.id}}" data-toggle="modal" data-target="#myModal" class=" btn btn-info btn-xs">编辑</button>
+                <button data-id="{{value.id}}" data-toggle="modal" data-target="#delModal" class="btn btn-danger btn-xs">删除</button>
+            </td>
+        </tr>
+        {{/each}}
+    </script>
 
 </html>

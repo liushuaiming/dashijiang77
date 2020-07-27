@@ -72,6 +72,19 @@
             </div>
         </div>
     </div>
+    <script type="text/html" id="template">
+        {{each data value index}}
+        <tr>
+            <td>{{value.name}}</td>
+            <td>{{valus.slug}} </td>
+            <td class="text-center">
+                <a href="javascript:void(0)" data-id='{{value.id}}' class="btn btn-default btn-xs">编辑</a>
+                <a href="javascript:void(0);" data-id='{{value.id}}' class="btn btn-danger btn-xs delete">删除</a>
+            </td>
+        </tr>
+
+        {{each}}
+    </script>
 </body>
 
 </html>
